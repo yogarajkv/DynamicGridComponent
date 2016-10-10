@@ -1,0 +1,51 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:appHostable" access="global" >
+    <ltng:require styles="/resource/SDLC213/assets/styles/salesforce-lightning-design-system.css" />
+    <aura:attribute name="experienceList" type="List" access="GLOBAL"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="deleteRowEvent"  event="c:DeleteGridRowEvent" action="{!c.deleteRow}"/>
+    <aura:handler name="dateChangeEvent" event="c:GridRowChangeEvent" action="{!c.calculateExp}"/>
+    
+    <div class="slds-form--inline">
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textarea-input-01"> Relavant Experience</label>
+            <div class="slds-form-element__control">
+                <button class="slds-button slds-button--neutral" onclick="{!c.addRow}"> Add Row
+                    <c:svg xlinkHref="/resource/SDLC213/assets/icons/utility-sprite/svg/symbols.svg#add"
+                           class="slds-button__icon slds-button__icon--right"
+                           ariaHidden="true"></c:svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="slds-box slds-text-align--center slds-m-around--x-small">
+        <div>
+            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" data-label="Technology">Technology</th>
+                        <th scope="col" data-label="From">From</th>
+                        <th scope="col" data-label="To">To</th>
+                        <th scope="col" data-label="Exp">Exp(Yrs)</th>
+                        <th class="slds-cell-shrink" data-label="Action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.experienceList}" var="exp" indexVar="idx">
+                        <c:GridRow exp="{!exp}" index="{!idx}"/>  
+                    </aura:iteration>                    
+                </tbody>
+            </table>
+            <br/>
+            <aura:renderIf isTrue="{!v.experienceList.length>0}">
+                <div class="slds-form--inline">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="textarea-input-01">Total Years</label>
+                        <div class="slds-form-element__control">
+                            <ui:outputText aura:id="totalyears" value='0'/> 
+                        </div>
+                    </div>
+                </div></aura:renderIf>
+        </div>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:attribute name="exp" type="Object"/>
+    <aura:attribute name="index" type="integer"/>
+    
+    <aura:registerEvent name="deleteRowEvent" type="c:DeleteGridRowEvent"/>
+    <aura:registerEvent name="dateChangeEvent" type="c:GridRowChangeEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
+    <div aura:id="messages"/>
+    <tr class="slds-hint-parent">
+        <td role="gridcell" class="slds-cell-shrink" data-label="Technology">
+            <ui:inputText aura:id="techtext" class="slds-input" value="{!v.exp.Technology}" required="true" blur="{!c.validateText}">
+            </ui:inputText>      
+        </td>
+        <td role="gridcell" class="slds-cell-shrink" data-label="From">
+            <ui:inputDate aura:id="fromdate" class="slds-input" displayDatePicker="true" format="MMM YYYY" blur="{!c.dateChange}" required="true"
+                          value="{!v.exp.From}"/>
+        </td>
+        <td role="gridcell" class="slds-cell-shrink" data-label="To">
+            <ui:inputDate aura:id="todate" class="slds-input" displayDatePicker="true" format="MMM YYYY" blur="{!c.dateChange}" required="true"
+                          value="{!v.exp.To}"/>                    
+        </td>
+        <td role="gridcell" class="slds-cell-shrink" data-label="Exp(Yrs)">
+            <ui:outputText aura:id="totalyears" value="{!v.exp.Total}" />                    
+        </td>
+        <td role="gridcell" class="slds-cell-shrink" data-label="Action">                    
+            <button class="slds-button slds-button--icon" onclick="{!c.deleteRow}">
+                <c:svg xlinkHref="/resource/SDLC213/assets/icons/utility-sprite/svg/symbols.svg#delete"
+                       class="slds-button__icon"
+                       ariaHidden="true"></c:svg>
+            </button>
+        </td>
+    </tr> 
+</aura:component>
